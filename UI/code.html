@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workout Detail - Treino A</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&amp;family=Space+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-tertiary-fixed": "#321300", "secondary-container": "#274a75", "surface-tint": "#a4c9ff", "on-secondary": "#06315a", "surface-bright": "#353940", "on-primary": "#00315d", "surface-container-low": "#181c22", "inverse-primary": "#0060ac", "secondary-fixed": "#d3e3ff", "on-primary-fixed-variant": "#004883", "primary-container": "#1693ff", "surface-container-lowest": "#0a0e15", "surface-container": "#1c2026", "tertiary-fixed": "#ffdbc8", "on-tertiary-fixed-variant": "#743400", "on-surface": "#dfe2eb", "inverse-surface": "#dfe2eb", "on-surface-variant": "#c0c7d5", "error-container": "#93000a", primary: "#a4c9ff", "on-background": "#dfe2eb", "on-secondary-fixed-variant": "#254872", "surface-dim": "#0f141a", "secondary-fixed-dim": "#a7c9fa", "on-error": "#690005", "surface-container-highest": "#31353c", "surface-variant": "#31353c", surface: "#0f141a", "inverse-on-surface": "#2c3137", error: "#ffb4ab", "primary-fixed-dim": "#a4c9ff", "primary-fixed": "#d4e3ff", "on-secondary-container": "#99baeb", "on-primary-container": "#002a51", "on-primary-fixed": "#001c39", background: "#0f141a", "surface-container-high": "#262a31", outline: "#8a919f", "tertiary-fixed-dim": "#ffb68a", "on-tertiary": "#522300", "tertiary-container": "#e66f06", "on-secondary-fixed": "#001c39", "outline-variant": "#404753", "on-error-container": "#ffdad6", "on-tertiary-container": "#481e00", secondary: "#a7c9fa", tertiary: "#ffb68a"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {gutter: "16px", sm: "8px", margin: "20px", unit: "4px", xs: "4px", md: "16px", xl: "32px", lg: "24px"}, fontFamily: {"label-bold": ["Lexend"], "data-display": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "body-lg": ["Lexend"], "headline-lg": ["Space Grotesk"], "display-lg": ["Space Grotesk"], "body-md": ["Lexend"], headline: ["Space Grotesk"], body: ["Lexend"], label: ["Lexend"], display: "Space Grotesk"}, fontSize: {"label-bold": ["14px", {lineHeight: "1.2", fontWeight: "600"}], "data-display": ["40px", {lineHeight: "1", letterSpacing: "-0.04em", fontWeight: "700"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "600"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "1.2", fontWeight: "700"}], "display-lg": ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "body-md": ["16px", {lineHeight: "1.5", fontWeight: "400"}]}}}};</script>
+<style>
+        .sparkline-svg { width: 48px; height: 24px; }
+        .sparkline-path { fill: none; stroke: #c3f400; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .sparkline-glow { filter: drop-shadow(0 0 4px rgba(195, 244, 0, 0.4)); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+        .exercise-done { opacity: 0.5; }
+        .exercise-done h3 { text-decoration: line-through; }
+        .check-btn { transition: all 0.2s ease; }
+        .check-btn.active { color: #CCFF00; }
+    </style></head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24">
+<!-- TopAppBar (Transactional - Hidden Navigation Shell logically, keeping header for context but with back button) -->
+<header class="bg-[#121212] border-b border-[#333333] flex justify-between items-center w-full px-5 h-16 sticky top-0 z-40">
+<button class="text-[#CCFF00] hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-['Space_Grotesk'] font-bold tracking-tight text-[#CCFF00] text-xl">POWERUP</h1>
+<button class="text-[#CCFF00] hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<main class="p-margin max-w-3xl mx-auto space-y-xl">
+<!-- Header Section -->
+<div class="space-y-sm">
+<h2 class="font-headline-lg text-headline-lg text-primary">Treino A</h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">timer</span> 45 min
+                <span class="px-2">•</span>
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span> High Intensity
+            </p>
+</div>
+<!-- Exercise List -->
+<div class="space-y-sm">
+<!-- Exercise Item: Supino -->
+<div class="bg-surface-container rounded-lg p-lg border border-[#333333] flex items-center justify-between">
+<div class="flex items-center gap-md"><button class="check-btn mr-2 text-on-surface-variant hover:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-size: 24px;">check_circle</span>
+</button>
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed">fitness_center</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-surface">Supino Reto</h3>
+<div class="flex items-center gap-sm mt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">4 x 10</span>
+<div class="h-1 w-1 bg-outline-variant rounded-full"></div>
+<span class="font-label-bold text-label-bold text-primary-fixed">40kg</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md"><button class="check-btn mr-2 text-on-surface-variant hover:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-size: 24px;">check_circle</span>
+</button>
+<svg class="sparkline-svg sparkline-glow" viewbox="0 0 48 24">
+<path class="sparkline-path" d="M 2 20 L 12 16 L 22 18 L 32 8 L 46 4"></path>
+</svg>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Exercise Item: Agachamento -->
+<div class="bg-surface-container rounded-lg p-lg border border-[#333333] flex items-center justify-between">
+<div class="flex items-center gap-md"><button class="check-btn mr-2 text-on-surface-variant hover:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-size: 24px;">check_circle</span>
+</button>
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed">airline_seat_legroom_extra</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-surface">Agachamento Livre</h3>
+<div class="flex items-center gap-sm mt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">4 x 8</span>
+<div class="h-1 w-1 bg-outline-variant rounded-full"></div>
+<span class="font-label-bold text-label-bold text-primary-fixed">60kg</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md"><button class="check-btn mr-2 text-on-surface-variant hover:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-size: 24px;">check_circle</span>
+</button>
+<svg class="sparkline-svg sparkline-glow" viewbox="0 0 48 24">
+<path class="sparkline-path" d="M 2 18 L 12 18 L 22 14 L 32 10 L 46 6"></path>
+</svg>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Exercise Item: Desenvolvimento -->
+<div class="bg-surface-container rounded-lg p-lg border border-[#333333] flex items-center justify-between">
+<div class="flex items-center gap-md"><button class="check-btn mr-2 text-on-surface-variant hover:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-size: 24px;">check_circle</span>
+</button>
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed">front_hand</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-surface">Desenvolvimento</h3>
+<div class="flex items-center gap-sm mt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">3 x 12</span>
+<div class="h-1 w-1 bg-outline-variant rounded-full"></div>
+<span class="font-label-bold text-label-bold text-primary-fixed">20kg</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md"><button class="check-btn mr-2 text-on-surface-variant hover:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-size: 24px;">check_circle</span>
+</button>
+<svg class="sparkline-svg sparkline-glow" viewbox="0 0 48 24">
+<path class="sparkline-path" d="M 2 15 L 12 12 L 22 14 L 32 6 L 46 4"></path>
+</svg>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Exercise Item: Triceps -->
+<div class="bg-surface-container rounded-lg p-lg border border-[#333333] flex items-center justify-between exercise-done">
+<div class="flex items-center gap-md"><button class="check-btn mr-2 text-[#CCFF00]">
+<span class="material-symbols-outlined" style="font-size: 24px; font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">accessibility_new</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-surface-variant">Tríceps Polia</h3>
+<div class="flex items-center gap-sm mt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">3 x 15</span>
+<div class="h-1 w-1 bg-outline-variant rounded-full"></div>
+<span class="font-label-bold text-label-bold text-on-surface-variant">15kg</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md"><button class="check-btn mr-2 text-[#CCFF00]">
+<span class="material-symbols-outlined" style="font-size: 24px; font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<svg class="sparkline-svg" viewbox="0 0 48 24">
+<path class="sparkline-path" d="M 2 20 L 12 18 L 22 18 L 32 16 L 46 16" style="stroke: #8e9379;"></path>
+</svg>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="pt-md pb-xl flex justify-center">
+<button class="bg-primary-fixed text-on-primary-fixed font-label-bold text-label-bold px-8 py-4 rounded-full flex items-center gap-sm active:scale-95 transition-transform shadow-[0_0_20px_rgba(195,244,0,0.2)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                START WORKOUT
+            </button>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-8 right-6 w-14 h-14 bg-surface-container-highest border border-[#333333] text-primary-fixed rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform z-50">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+</body></html>
