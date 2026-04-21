@@ -1,0 +1,13 @@
+{
+  "appId": "com.powerup.app",
+  "appName": "PowerUp",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "CapacitorSQLite": {
+      "androidIsEncryption": false
+    }
+  }
+}

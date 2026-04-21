@@ -1,3 +1,8 @@
+# Build output & native platform
+www/
+android/
+node_modules/
+
 # Images
 *.jpg
 *.jpeg
