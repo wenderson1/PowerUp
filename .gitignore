@@ -1,6 +1,5 @@
-# Build output & native platform
+# Build output & generated
 www/
-android/
 node_modules/
 
 # Images
