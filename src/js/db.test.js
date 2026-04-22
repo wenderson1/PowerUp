@@ -1,7 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from "vitest";
 
 // Must be hoisted before any imports of the module under test
-vi.mock('@capacitor-community/sqlite', () => {
+vi.mock("@capacitor-community/sqlite", () => {
   const mockDB = {
     open: vi.fn().mockResolvedValue(undefined),
   };
@@ -19,10 +19,10 @@ vi.mock('@capacitor-community/sqlite', () => {
   };
 });
 
-import { initDatabase, getDB } from './db.js';
-import * as sqliteMock from '@capacitor-community/sqlite';
+import { initDatabase, getDB } from "./db.js";
+import * as sqliteMock from "@capacitor-community/sqlite";
 
-describe('db.js', () => {
+describe("db.js", () => {
   beforeEach(() => {
     vi.resetModules();
     // Reset mock call counts between tests
@@ -33,32 +33,43 @@ describe('db.js', () => {
     sqliteMock._mockDB.open.mockClear();
   });
 
-  it('getDB() throws before initDatabase() is called', () => {
-    expect(() => getDB()).toThrow('DB not initialized');
+  it("getDB() throws before initDatabase() is called", () => {
+    expect(() => getDB()).toThrow("DB not initialized");
   });
 
-  it('initDatabase() calls addUpgradeStatement with correct DB name and version 1', async () => {
-    sqliteMock._mockSQLite.isConnection.mockResolvedValueOnce({ result: false });
+  it("initDatabase() calls addUpgradeStatement with correct DB name and version 1", async () => {
+    sqliteMock._mockSQLite.isConnection.mockResolvedValueOnce({
+      result: false,
+    });
     await initDatabase();
     expect(sqliteMock._mockSQLite.addUpgradeStatement).toHaveBeenCalledWith(
-      'powerup',
-      expect.arrayContaining([expect.objectContaining({ toVersion: 1 })])
+      "powerup",
+      expect.arrayContaining([expect.objectContaining({ toVersion: 1 })]),
     );
   });
 
-  it('initDatabase() calls createConnection when no existing connection', async () => {
-    sqliteMock._mockSQLite.isConnection.mockResolvedValueOnce({ result: false });
+  it("initDatabase() calls createConnection when no existing connection", async () => {
+    sqliteMock._mockSQLite.isConnection.mockResolvedValueOnce({
+      result: false,
+    });
     await initDatabase();
     expect(sqliteMock._mockSQLite.createConnection).toHaveBeenCalledWith(
-      'powerup', false, 'no-encryption', 1, false
+      "powerup",
+      false,
+      "no-encryption",
+      1,
+      false,
     );
     expect(sqliteMock._mockSQLite.retrieveConnection).not.toHaveBeenCalled();
   });
 
-  it('initDatabase() calls retrieveConnection when connection already exists', async () => {
+  it("initDatabase() calls retrieveConnection when connection already exists", async () => {
     sqliteMock._mockSQLite.isConnection.mockResolvedValueOnce({ result: true });
     await initDatabase();
-    expect(sqliteMock._mockSQLite.retrieveConnection).toHaveBeenCalledWith('powerup', false);
+    expect(sqliteMock._mockSQLite.retrieveConnection).toHaveBeenCalledWith(
+      "powerup",
+      false,
+    );
     expect(sqliteMock._mockSQLite.createConnection).not.toHaveBeenCalled();
   });
 });

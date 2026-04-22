@@ -1,43 +1,191 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="dark" lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PowerUp</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-tertiary-fixed": "#321300", "secondary-container": "#274a75", "surface-tint": "#a4c9ff", "on-secondary": "#06315a", "surface-bright": "#353940", "on-primary": "#00315d", "surface-container-low": "#181c22", "inverse-primary": "#0060ac", "secondary-fixed": "#d3e3ff", "on-primary-fixed-variant": "#004883", "primary-container": "#1693ff", "surface-container-lowest": "#0a0e15", "surface-container": "#1c2026", "tertiary-fixed": "#ffdbc8", "on-tertiary-fixed-variant": "#743400", "on-surface": "#dfe2eb", "inverse-surface": "#dfe2eb", "on-surface-variant": "#c0c7d5", "error-container": "#93000a", primary: "#a4c9ff", "on-background": "#dfe2eb", "on-secondary-fixed-variant": "#254872", "surface-dim": "#0f141a", "secondary-fixed-dim": "#a7c9fa", "on-error": "#690005", "surface-container-highest": "#31353c", "surface-variant": "#31353c", surface: "#0f141a", "inverse-on-surface": "#2c3137", error: "#ffb4ab", "primary-fixed-dim": "#a4c9ff", "primary-fixed": "#d4e3ff", "on-secondary-container": "#99baeb", "on-primary-container": "#002a51", "on-primary-fixed": "#001c39", background: "#0f141a", "surface-container-high": "#262a31", outline: "#8a919f", "tertiary-fixed-dim": "#ffb68a", "on-tertiary": "#522300", "tertiary-container": "#e66f06", "on-secondary-fixed": "#001c39", "outline-variant": "#404753", "on-error-container": "#ffdad6", "on-tertiary-container": "#481e00", secondary: "#a7c9fa", tertiary: "#ffb68a"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {gutter: "16px", sm: "8px", margin: "20px", unit: "4px", xs: "4px", md: "16px", xl: "32px", lg: "24px"}, fontFamily: {"label-bold": ["Lexend"], "data-display": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "body-lg": ["Lexend"], "headline-lg": ["Space Grotesk"], "display-lg": ["Space Grotesk"], "body-md": ["Lexend"], headline: ["Space Grotesk"], body: ["Lexend"], label: ["Lexend"], display: "Space Grotesk"}, fontSize: {"label-bold": ["14px", {lineHeight: "1.2", fontWeight: "600"}], "data-display": ["40px", {lineHeight: "1", letterSpacing: "-0.04em", fontWeight: "700"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "600"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "1.2", fontWeight: "700"}], "display-lg": ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700"}], "body-md": ["16px", {lineHeight: "1.5", fontWeight: "400"}]}}}};</script>
-  <style>
-    body { min-height: 100dvh; }
-    .nav-btn.active .nav-icon,
-    .nav-btn.active .nav-label { color: #a4c9ff; }
-  </style>
-  <script type="module" crossorigin src="/assets/index-D-9knd0r.js"></script>
-</head>
-<body class="bg-background text-on-background font-body-md flex flex-col min-h-screen">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PowerUp</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#321300",
+              "secondary-container": "#274a75",
+              "surface-tint": "#a4c9ff",
+              "on-secondary": "#06315a",
+              "surface-bright": "#353940",
+              "on-primary": "#00315d",
+              "surface-container-low": "#181c22",
+              "inverse-primary": "#0060ac",
+              "secondary-fixed": "#d3e3ff",
+              "on-primary-fixed-variant": "#004883",
+              "primary-container": "#1693ff",
+              "surface-container-lowest": "#0a0e15",
+              "surface-container": "#1c2026",
+              "tertiary-fixed": "#ffdbc8",
+              "on-tertiary-fixed-variant": "#743400",
+              "on-surface": "#dfe2eb",
+              "inverse-surface": "#dfe2eb",
+              "on-surface-variant": "#c0c7d5",
+              "error-container": "#93000a",
+              primary: "#a4c9ff",
+              "on-background": "#dfe2eb",
+              "on-secondary-fixed-variant": "#254872",
+              "surface-dim": "#0f141a",
+              "secondary-fixed-dim": "#a7c9fa",
+              "on-error": "#690005",
+              "surface-container-highest": "#31353c",
+              "surface-variant": "#31353c",
+              surface: "#0f141a",
+              "inverse-on-surface": "#2c3137",
+              error: "#ffb4ab",
+              "primary-fixed-dim": "#a4c9ff",
+              "primary-fixed": "#d4e3ff",
+              "on-secondary-container": "#99baeb",
+              "on-primary-container": "#002a51",
+              "on-primary-fixed": "#001c39",
+              background: "#0f141a",
+              "surface-container-high": "#262a31",
+              outline: "#8a919f",
+              "tertiary-fixed-dim": "#ffb68a",
+              "on-tertiary": "#522300",
+              "tertiary-container": "#e66f06",
+              "on-secondary-fixed": "#001c39",
+              "outline-variant": "#404753",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-container": "#481e00",
+              secondary: "#a7c9fa",
+              tertiary: "#ffb68a",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              gutter: "16px",
+              sm: "8px",
+              margin: "20px",
+              unit: "4px",
+              xs: "4px",
+              md: "16px",
+              xl: "32px",
+              lg: "24px",
+            },
+            fontFamily: {
+              "label-bold": ["Lexend"],
+              "data-display": ["Space Grotesk"],
+              "headline-md": ["Space Grotesk"],
+              "body-lg": ["Lexend"],
+              "headline-lg": ["Space Grotesk"],
+              "display-lg": ["Space Grotesk"],
+              "body-md": ["Lexend"],
+              headline: ["Space Grotesk"],
+              body: ["Lexend"],
+              label: ["Lexend"],
+              display: "Space Grotesk",
+            },
+            fontSize: {
+              "label-bold": ["14px", { lineHeight: "1.2", fontWeight: "600" }],
+              "data-display": [
+                "40px",
+                {
+                  lineHeight: "1",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-lg": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        min-height: 100dvh;
+      }
+      .nav-btn.active .nav-icon,
+      .nav-btn.active .nav-label {
+        color: #a4c9ff;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-B86seXWo.js"></script>
+  </head>
+  <body
+    class="bg-background text-on-background font-body-md flex flex-col min-h-screen"
+  >
+    <!-- Header -->
+    <header
+      class="bg-[#121212] border-b border-[#333333] flex justify-between items-center w-full px-5 h-16 sticky top-0 z-40"
+    >
+      <button
+        id="btn-back"
+        class="invisible w-10 text-[#CCFF00] hover:opacity-80 transition-opacity active:scale-95"
+        aria-label="Voltar"
+      >
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <h1
+        class="font-['Space_Grotesk'] font-bold tracking-tight text-[#CCFF00] text-xl"
+      >
+        POWERUP
+      </h1>
+      <div class="w-10"></div>
+    </header>
 
-  <!-- Header -->
-  <header class="bg-[#121212] border-b border-[#333333] flex justify-between items-center w-full px-5 h-16 sticky top-0 z-40">
-    <div class="w-10"></div>
-    <h1 class="font-['Space_Grotesk'] font-bold tracking-tight text-[#CCFF00] text-xl">POWERUP</h1>
-    <div class="w-10"></div>
-  </header>
+    <!-- Screen mount point -->
+    <main id="screen" class="flex-1 p-4 max-w-3xl mx-auto w-full"></main>
 
-  <!-- Screen mount point -->
-  <main id="screen" class="flex-1 p-4 max-w-3xl mx-auto w-full"></main>
-
-  <!-- Bottom Navigation -->
-  <nav class="bg-[#121212] border-t border-[#333333] flex justify-around items-center h-16 sticky bottom-0 z-40">
-    <button class="nav-btn active flex flex-col items-center gap-1 px-6 py-2" data-route="#/">
-      <span class="nav-icon material-symbols-outlined text-on-surface-variant" style="font-size:24px">fitness_center</span>
-      <span class="nav-label text-xs text-on-surface-variant">Treinos</span>
-    </button>
-    <button class="nav-btn flex flex-col items-center gap-1 px-6 py-2" data-route="#/history">
-      <span class="nav-icon material-symbols-outlined text-on-surface-variant" style="font-size:24px">history</span>
-      <span class="nav-label text-xs text-on-surface-variant">Histórico</span>
-    </button>
-  </nav>
+    <!-- Bottom Navigation -->
+    <nav
+      class="bg-[#121212] border-t border-[#333333] flex justify-around items-center h-16 sticky bottom-0 z-40"
+    >
+      <button
+        class="nav-btn active flex flex-col items-center gap-1 px-6 py-2"
+        data-route="#/"
+      >
+        <span
+          class="nav-icon material-symbols-outlined text-on-surface-variant"
+          style="font-size: 24px"
+          >fitness_center</span
+        >
+        <span class="nav-label text-xs text-on-surface-variant">Treinos</span>
+      </button>
+      <button
+        class="nav-btn flex flex-col items-center gap-1 px-6 py-2"
+        data-route="#/history"
+      >
+        <span
+          class="nav-icon material-symbols-outlined text-on-surface-variant"
+          style="font-size: 24px"
+          >history</span
+        >
+        <span class="nav-label text-xs text-on-surface-variant">Histórico</span>
+      </button>
+    </nav>
 
-</body>
+  </body>
 </html>
