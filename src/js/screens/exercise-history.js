@@ -23,8 +23,11 @@ export async function render(container, params) {
 
   const backBtn = document.getElementById("btn-back");
   backBtn.classList.remove("invisible");
-  backBtn.onclick = () =>
-    ctx.workoutId ? navigate("#/workout/" + ctx.workoutId) : navigate("#/");
+  backBtn.onclick = () => {
+    if (ctx.backRoute) return navigate(ctx.backRoute);
+    if (ctx.workoutId) return navigate("#/workout/" + ctx.workoutId);
+    navigate("#/");
+  };
 
   if (!exerciseId || isNaN(exerciseId)) {
     container.innerHTML = `

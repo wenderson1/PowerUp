@@ -6,5 +6,6 @@
     "git commit": true,
     "npx vitest": true,
     "npx cap": true
-  }
+  },
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

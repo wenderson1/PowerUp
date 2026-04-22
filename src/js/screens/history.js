@@ -52,6 +52,7 @@ export async function render(container) {
                       transition-colors session-card"
                data-session-id="${s.id}"
                data-workout-name="${escapeHtml(s.workout_name)}"
+               data-workout-id="${s.workout_id}"
                data-started-at="${escapeHtml(s.started_at)}">
             <div class="flex flex-col gap-xs">
               <span class="font-label-bold text-label-bold text-on-surface">${escapeHtml(s.workout_name)}</span>
@@ -73,6 +74,7 @@ export async function render(container) {
     card.addEventListener("click", () => {
       window._sessionLogContext = {
         workoutName: card.dataset.workoutName,
+        workoutId: Number(card.dataset.workoutId),
         startedAt: card.dataset.startedAt,
       };
       navigate("#/session-log/" + card.dataset.sessionId);

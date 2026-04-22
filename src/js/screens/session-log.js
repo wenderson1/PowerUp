@@ -61,7 +61,10 @@ export async function render(container, params) {
       : exercises
           .map(
             (ex) => `
-          <div class="bg-surface-container rounded-lg p-lg border border-outline-variant flex items-center gap-md">
+          <div class="session-log-ex-row bg-surface-container rounded-lg p-lg border border-outline-variant
+                      flex items-center gap-md cursor-pointer active:bg-surface-container-high transition-colors"
+               data-exercise-id="${ex.exercise_id}"
+               data-exercise-name="${escapeHtml(ex.exercise_name)}">
             <span class="material-symbols-outlined flex-shrink-0 ${ex.completed ? "text-primary" : "text-on-surface-variant"}"
                   style="font-size:22px;font-variation-settings:'FILL' ${ex.completed ? 1 : 0}">
               ${ex.completed ? "check_circle" : "radio_button_unchecked"}
@@ -70,6 +73,7 @@ export async function render(container, params) {
               <span class="font-label-bold text-label-bold ${ex.completed ? "text-on-surface" : "text-on-surface-variant"}">${escapeHtml(ex.exercise_name)}</span>
               <span class="text-sm font-body-md text-on-surface-variant">${ex.weight_kg != null ? ex.weight_kg + " kg" : "—"}</span>
             </div>
+            <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">chevron_right</span>
           </div>`,
           )
           .join("");
@@ -82,4 +86,16 @@ export async function render(container, params) {
       </div>
       <div class="space-y-3">${listHTML}</div>
     </div>`;
+
+  container.querySelectorAll(".session-log-ex-row").forEach((row) => {    row.addEventListener("click", () => {
+      window._exerciseContext = {
+        exerciseId: Number(row.dataset.exerciseId),
+        exerciseName: row.dataset.exerciseName,
+        workoutId: ctx.workoutId || null,
+        workoutName: ctx.workoutName || "",
+        backRoute: "#/session-log/" + sessionId,
+      };
+      navigate("#/exercise-history/" + row.dataset.exerciseId);
+    });
+  });
 }

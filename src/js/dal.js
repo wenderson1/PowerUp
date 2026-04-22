@@ -119,7 +119,7 @@ export async function getSessions(workoutId) {
 export async function getCompletedSessions() {
   const db = getDB();
   const result = await db.query(
-    `SELECT s.id, s.started_at, w.name AS workout_name,
+    `SELECT s.id, s.workout_id, s.started_at, w.name AS workout_name,
             COUNT(se.id) AS exercise_count
      FROM sessions s
      JOIN workouts w ON w.id = s.workout_id

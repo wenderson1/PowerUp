@@ -4,6 +4,7 @@ import {
   logWeight,
   markExerciseDone,
   finishSession,
+  getWeightHistory,
 } from "../dal.js";
 import { navigate } from "../router.js";
 
@@ -55,24 +56,37 @@ export async function render(container, params) {
   const rowsHTML = exercises
     .map(
       (ex) => `
-    <div class="session-exercise-row bg-surface-container rounded-lg p-lg border border-outline-variant
-                flex items-center justify-between transition-opacity"
+    <div class="session-exercise-row bg-surface-container rounded-lg border border-outline-variant transition-opacity"
          data-exercise-id="${ex.id}">
-      <div class="flex items-center gap-md flex-1 min-w-0">
-        <button class="btn-done-toggle text-on-surface-variant active:scale-90 transition-transform flex-shrink-0"
-                data-exercise-id="${ex.id}" aria-label="Marcar como feito">
-          <span class="done-icon material-symbols-outlined" style="font-size:28px">check_circle</span>
-        </button>
-        <span class="exercise-name font-label-bold text-label-bold text-on-surface truncate">
-          ${escapeHtml(ex.name)}
-        </span>
+      <div class="row-header p-lg flex items-center justify-between cursor-pointer active:bg-surface-container-high transition-colors"
+           data-exercise-id="${ex.id}">
+        <div class="flex items-center gap-md flex-1 min-w-0">
+          <button class="btn-done-toggle text-on-surface-variant active:scale-90 transition-transform flex-shrink-0"
+                  data-exercise-id="${ex.id}" aria-label="Marcar como feito">
+            <span class="done-icon material-symbols-outlined" style="font-size:28px">check_circle</span>
+          </button>
+          <span class="exercise-name font-label-bold text-label-bold text-on-surface truncate">
+            ${escapeHtml(ex.name)}
+          </span>
+        </div>
+        <div class="flex items-center gap-sm flex-shrink-0 ml-md">
+          <input type="number" inputmode="decimal" placeholder="0"
+            class="weight-input w-16 bg-surface-container-high rounded p-sm border border-outline-variant
+                   text-on-surface font-body-md text-body-md text-center focus:border-primary outline-none"
+            min="0" step="0.5" />
+          <span class="text-on-surface-variant font-body-md text-body-md text-sm">kg</span>
+        </div>
       </div>
-      <div class="flex items-center gap-sm flex-shrink-0 ml-md">
-        <input type="number" inputmode="decimal" placeholder="0"
-          class="weight-input w-16 bg-surface-container-high rounded p-sm border border-outline-variant
-                 text-on-surface font-body-md text-body-md text-center focus:border-primary outline-none"
-          min="0" step="0.5" />
-        <span class="text-on-surface-variant font-body-md text-body-md text-sm">kg</span>
+      <div id="detail-${ex.id}" class="detail-panel border-t border-outline-variant px-lg pb-md pt-sm"
+           style="display:none">
+        <div class="flex items-center justify-between gap-md">
+          <span class="detail-text text-on-surface-variant text-sm font-body-md">Carregando...</span>
+          <button class="btn-ex-full-history text-primary text-sm font-label-bold flex items-center gap-xs"
+                  data-exercise-id="${ex.id}" data-exercise-name="${escapeHtml(ex.name)}" aria-label="Ver histórico completo">
+            <span class="material-symbols-outlined" style="font-size:16px">history</span>
+            Ver histórico
+          </button>
+        </div>
       </div>
     </div>`,
     )
@@ -102,6 +116,34 @@ export async function render(container, params) {
     btn.addEventListener("click", () =>
       handleToggle(btn, sessionId, totalCount),
     );
+  });
+
+  // Wire row click to expand detail (whole row except buttons and input)
+  exercises.forEach((ex) => {
+    const rowEl = container.querySelector(
+      `.session-exercise-row[data-exercise-id="${ex.id}"]`,
+    );
+    if (!rowEl) return;
+    rowEl.addEventListener("click", (e) => {
+      if (e.target.tagName === "INPUT") return;
+      if (e.target.closest("button")) return;
+      toggleExerciseDetail(ex.id);
+    });
+  });
+
+  // Wire full history buttons
+  container.querySelectorAll(".btn-ex-full-history").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window._exerciseContext = {
+        exerciseId: Number(btn.dataset.exerciseId),
+        exerciseName: btn.dataset.exerciseName,
+        workoutId,
+        workoutName: workout ? workout.name : "",
+        backRoute: "#/session/" + sessionId,
+      };
+      navigate("#/exercise-history/" + btn.dataset.exerciseId);
+    });
   });
 
   // Wire finish button
@@ -152,6 +194,10 @@ async function handleToggle(btn, sessionId, totalCount) {
       btn.classList.add("text-primary");
       btn.classList.remove("text-on-surface-variant");
       weightInput.disabled = true;
+
+      // Close detail panel if open
+      const detail = document.getElementById(`detail-${exerciseId}`);
+      if (detail) detail.style.display = "none";
     } catch (err) {
       alert("Erro ao registrar exercício: " + err.message);
       return;
@@ -175,6 +221,35 @@ function updateProgress(totalCount) {
     } else {
       finishBtn.classList.add("opacity-50", "pointer-events-none");
     }
+  }
+}
+
+async function toggleExerciseDetail(exerciseId) {
+  const detail = document.getElementById(`detail-${exerciseId}`);
+  if (!detail) return;
+
+  const isOpen = detail.style.display === "block";
+  if (isOpen) {
+    detail.style.display = "none";
+    return;
+  }
+
+  detail.style.display = "block";
+  const textEl = detail.querySelector(".detail-text");
+  textEl.textContent = "Carregando...";
+
+  try {
+    const history = await getWeightHistory(Number(exerciseId), 1);
+    if (history.length === 0) {
+      textEl.textContent = "Nenhum peso registrado ainda";
+    } else {
+      const entry = history[0];
+      const d = new Date(entry.logged_at.replace(" ", "T"));
+      const date = `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}/${d.getFullYear()}`;
+      textEl.innerHTML = `Último: <span class="text-on-surface font-label-bold">${entry.weight_kg} kg</span> &middot; ${date}`;
+    }
+  } catch {
+    textEl.textContent = "Erro ao carregar";
   }
 }
 
